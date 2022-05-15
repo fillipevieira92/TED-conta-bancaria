@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="/css/login.css">
+
+    <!-- JQuery | Mask -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js" integrity="sha512-n/4gHW3atM3QqRcbCn6ewmpxcLAHGaDjpEBu4xZd47N0W2oQ+6q7oc3PXstrJYXcbNU1OHdQ1T7pAP+gi5Yu8g==" crossorigin="anonymous" referrerpolicy="no-referrer" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.8/jquery.mask.js" integrity="sha512-2Pv9x5icS9MKNqqCPBs8FDtI6eXY0GrtBy8JdSwSR4GVlBWeH5/eqXBFbwGGqHka9OABoFDelpyDnZraQawusw==" crossorigin="anonymous" referrerpolicy="no-meferrer" defer></script>    
+
+    <!-- JS -->
+    <script src="/js/login-cadastro.js" defer></script>
+    
+    
+    <title>FV | Bank</title>
+</head>
+<body>
+    <main>
+        <div class="content">
+            <div class="content-header">
+                <img src="/img/logo-preto.png" width="100%" alt="Logo FV|Bank">
+            </div>
+            <form action="#" method="post">
+                <input class="input" id="cpf" type="text" placeholder="CPF" autocomplete="off">
+                <input class="input" type="password" placeholder="Senha">
+                <button class="button button-yellow" type="submit">Login</button>                
+            </form>
+            <span>Clique <a href="/cadastro">aqui</a> para abrir uma conta.</span>
+        </div>
+    </main>    
+</body>
+</html>

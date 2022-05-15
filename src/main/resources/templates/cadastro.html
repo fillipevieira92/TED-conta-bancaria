@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="/css/login.css">
+
+    <!-- JQuery | Mask -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js" integrity="sha512-n/4gHW3atM3QqRcbCn6ewmpxcLAHGaDjpEBu4xZd47N0W2oQ+6q7oc3PXstrJYXcbNU1OHdQ1T7pAP+gi5Yu8g==" crossorigin="anonymous" referrerpolicy="no-referrer" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.8/jquery.mask.js" integrity="sha512-2Pv9x5icS9MKNqqCPBs8FDtI6eXY0GrtBy8JdSwSR4GVlBWeH5/eqXBFbwGGqHka9OABoFDelpyDnZraQawusw==" crossorigin="anonymous" referrerpolicy="no-meferrer" defer></script>    
+
+    <!-- JS -->
+    <script src="/js/login-cadastro.js" defer></script>
+    
+    
+    <title>FV | Bank</title>
+</head>
+<body>
+    <main>
+        <main>
+            <div class="content">
+                <div class="content-header">
+                    <img src="/img/logo-preto.png" width="100%" alt="Logo FV|Bank">
+                </div>
+                <form action="#" method="post">
+                    <input onkeypress="validaCampos()" class="input" id="nome" name="nome" type="text" placeholder="Nome Completo" autocomplete="off">
+                    <input onkeypress="validaCampos()" class="input" id="cpf" name="cpf" type="text" placeholder="CPF" autocomplete="off">
+                    <input class="input" id="senha" name="senha" onkeyup="validaSenha()" type="password" placeholder="Senha">
+                    <i class="alerta" id="alert-caracteres" hidden>5 caracteres ou mais</i>
+                    <input class="input" id="confirmar-senha" onkeyup="validaSenha()" type="password" placeholder="Confirme sua senha">
+                    <i class="alerta" id="alert-senhas-diferentes" hidden>Senhas diferentes</i>
+                    <button class="button button-yellow disabled" type="submit" hidden>Criar Conta</button>                
+                </form>
+            </div>            
+        </main>
+    </main>
+</body>
+</html>
