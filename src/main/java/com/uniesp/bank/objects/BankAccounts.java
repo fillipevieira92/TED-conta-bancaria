@@ -22,7 +22,7 @@ public class BankAccounts {
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long conta;
     String nome;
-    int cpf;
+    String cpf;
     double saldo;
     String senha;
     

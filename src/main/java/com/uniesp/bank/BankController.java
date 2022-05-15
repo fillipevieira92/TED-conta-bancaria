@@ -1,16 +1,13 @@
 package com.uniesp.bank;
 
 
-import java.util.Collection;
-import java.util.List;
 import java.util.Map;
-import java.util.stream.Stream;
 
+import com.uniesp.bank.objects.AccountsController;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -20,22 +17,31 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class BankController {
 
+    private AccountsController controle;
+           
+    
     // Pagina de login GET    
-    @GetMapping("/login")
+    @GetMapping("/")
     public ModelAndView getLoginPage() {
+
         return new ModelAndView("login");
     }
     // Pagina de login POST
     @PostMapping("/login/submit")
-    public ModelAndView setLoginPage(@RequestParam Map<String,String> body) {
-        System.out.println(body);
+    public ModelAndView setLoginPage(@RequestParam Map<String, String> body) {
         
-        Object data = body.values().toArray()[0];
-            
+        boolean logged = false;
 
-        System.out.println(data);
-                
-        return new ModelAndView("login");
+        String cpf = body.get("cpf");
+        String senha = body.get("senha");
+
+        logged = controle.autenticar(cpf, senha);
+
+        if (logged) {
+            return new ModelAndView("index");
+        } else {
+            return getLoginPage();
+        }
     }
 
     // Pagina de cadastro GET
@@ -44,14 +50,19 @@ public class BankController {
         return new ModelAndView("cadastro");
     }
     // Pagina de cadastro POST
-    @PostMapping("/cadastro")
-    public ModelAndView setCadastro() {
-        return new ModelAndView("cadastro");
+    @PostMapping("/cadastro/submit")
+    public ModelAndView setCadastro(@RequestParam Map<String, String> body) {       
+
+        String nome = body.get("nome");
+        String cpf = body.get("cpf");
+        String senha = body.get("senha");   
+        
+        controle.cadastrar(nome, cpf, senha);
+
+        return getLoginPage();
     }
 
-
-    @RequestMapping("/")
     public ModelAndView index() {
-        return new ModelAndView("index");          
+        return new ModelAndView("index");
     }
 }
