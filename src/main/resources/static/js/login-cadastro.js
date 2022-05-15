@@ -1,5 +1,21 @@
 $('#cpf').mask('000.000.000-00');
 
+// Escutando o submit.
+var formLogin = document.querySelector('#form-login');
+formLogin.addEventListener('submit', (event) => {
+    event.preventDefault();
+    const cpf = $('#cpf').val();
+    const senha = $('#senha').val();
+    const data = [cpf, senha]
+    
+    $.ajax({
+        url: '/login/submit',
+        type: 'POST',
+        data: data,
+    })    
+})
+
+
 // Checa se todos os campos estao preenchidos.
 var nomeConfirm = false;
 var cpfConfirm = false;
