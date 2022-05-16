@@ -30,12 +30,14 @@
                 <li id="saque">Saque</li>
                 <li id="transferencias">Transferências</li>
                 <li id="depositos">Depositos</li>
-                <li id="sair">Sair</li>                
+                <li id="sair" onclick="sair()">Sair</a></li>
             </ul>
         </nav>
     </header>
     <main>        
         <!-- Background LOGO -->
+        
+
         <div class="back-img"><img src="/img/logo-escuro.png" width="50%" height="50%" alt=""></div>
 
         <!-- Conteudo -->
@@ -47,12 +49,12 @@
                     <span><strong>Olá, seja bem vindo(a)</strong></span>
                 </div>
                 <div class="row">
-                    <input class="col" type="text" id="conta" value="Conta: 000.000-0" disabled>
-                    <input class="col" type="text" id="saldo" value="Saldo: R$0.000.000,00" disabled>
+                    <input class="col" type="text" id="conta" th:value="|Conta: ${usuario.conta}|" disabled>
+                    <input class="col" type="text" id="saldo" th:value="|R$: ${usuario.saldo}|" disabled>
                 </div>
                 <div class="row">
-                    <input class="col" type="text" id="nome" value="Nome: Fillipe Yuri Vieira Araujo" disabled>
-                    <input class="col" type="text" id="cpf" value="CPF: 000.000.000-00" disabled>
+                    <input class="col" type="text" id="nome" th:value="|Nome: ${usuario.nome}|" disabled>
+                    <input class="col" type="text" id="cpf" th:value="|CPF: ${usuario.cpf}|" disabled>
                 </div>
             </div>
 
@@ -60,7 +62,7 @@
             <div class="saque" hidden>
                 <form action="/sacar" method="post" class="text-center">
                     <div class="row">
-                        <input class="col" type="text" id="saldo" value="Saldo: R$0.000.000,00" disabled>
+                        <input class="col" type="text" id="saldoSaque" th:value="|R$: ${usuario.saldo}|" disabled>
                         <input class="col valores" type="text" id="valor-saque" placeholder="Valor a ser sacado">
                     </div>
                     <button class="button button-yellow" type="submit">Sacar</button>
@@ -73,12 +75,12 @@
                     <input class="col" type="text" id="cpf-pesquisa" placeholder="Pesquise a conta destino por CPF">
                 </div>
                 <div class="row dados-destino-transferencia">
-                    <input class="col" type="text" id="conta-destino" value="Conta Destino: 000.000-0" disabled>
-                    <input class="col" type="text" id="nome-destino" value="Nome Destino: Fulano da Silva" disabled>
+                    <input class="col" type="text" id="conta-destino" th:value="|Conta Destino: ${destinatarioConta}|" disabled>
+                    <input class="col" type="text" id="nome-destino" th:value="|Nome Destino: ${destinatarioNome}|" disabled>
                 </div>
                 <form id="form-transferencias" action="/transferir" method="post" class="text-center">
                     <div class="row">
-                        <input class="col" type="text" id="saldo" value="Saldo: R$0.000.000,00" disabled>
+                        <input class="col" type="text" id="saldoTransferencia" th:value="|R$: ${usuario.saldo}|" disabled>
                         <input class="col valores" type="text" id="valor-transferencia" placeholder="Valor a ser transferido">
                     </div>
                     <button class="button button-yellow" type="submit">Transferir</button>
@@ -89,7 +91,7 @@
             <div class="depositos" hidden>
                 <form id="form-deposito" action="/depositar" method="post" class="text-center">
                     <div class="row">
-                        <input class="col" type="text" id="saldo" value="Saldo: R$0.000.000,00" disabled>
+                        <input class="col" type="text" id="saldoDeposito" th:value="|R$: ${usuario.saldo}|" disabled>
                         <input class="col valores" type="text" id="valor-deposito" placeholder="Valor a ser depositado">
                     </div>
                     <button class="button button-yellow" type="submit">Depositar</button>

@@ -4,6 +4,7 @@ package com.uniesp.bank;
 import java.util.Map;
 
 import com.uniesp.bank.objects.AccountsController;
+import com.uniesp.bank.objects.BankAccounts;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,7 +19,6 @@ import lombok.AllArgsConstructor;
 public class BankController {
 
     private AccountsController controle;
-           
     
     // Pagina de login GET    
     @GetMapping("/")
@@ -38,7 +38,7 @@ public class BankController {
         logged = controle.autenticar(cpf, senha);
 
         if (logged) {
-            return new ModelAndView("index");
+            return index(controle.getAccountByCPF(cpf));
         } else {
             return getLoginPage();
         }
@@ -53,7 +53,7 @@ public class BankController {
     @PostMapping("/cadastro/submit")
     public ModelAndView setCadastro(@RequestParam Map<String, String> body) {       
 
-        String nome = body.get("nome");
+        String nome = body.get("nome").toUpperCase();
         String cpf = body.get("cpf");
         String senha = body.get("senha");   
         
@@ -62,7 +62,18 @@ public class BankController {
         return getLoginPage();
     }
 
-    public ModelAndView index() {
-        return new ModelAndView("index");
+    public ModelAndView index(BankAccounts usuario) {
+
+        ModelAndView modelAndview = new ModelAndView("index");
+        modelAndview.addObject("usuario", usuario);
+        modelAndview.addObject("destinatarioConta", "");
+        modelAndview.addObject("destinatarioNome", "");
+
+        return modelAndview;
+    }
+
+    @GetMapping("/logout")
+    public ModelAndView logout() {
+        return getLoginPage();
     }
 }

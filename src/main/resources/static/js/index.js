@@ -28,3 +28,8 @@ $('li').on('click', function() {
     }
 })
 
+//Sair
+function sair() {
+    window.location.href = "/logout"
+}
+
