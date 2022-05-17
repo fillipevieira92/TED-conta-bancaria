@@ -1,10 +1,12 @@
-package com.uniesp.bank;
+package com.uniesp.bank.controllers;
 
 
+import java.util.ArrayList;
 import java.util.Map;
 
-import com.uniesp.bank.model.AccountsController;
 import com.uniesp.bank.model.BankAccount;
+import com.uniesp.bank.service.Auth;
+import com.uniesp.bank.service.BankService;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,36 +15,36 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.RequestBody;
 
 
 @RestController
 @AllArgsConstructor
-public class UrlsAndViews {
+public class ViewsController {
 
-    private AccountsController accountsController;
-    
+    BankService bankService;
+
     // Pagina de login GET    
     @GetMapping("/")
     public ModelAndView getLoginPage() {
         return new ModelAndView("login");
     }
 
-    // Responsável por pegar os dados do form de login e validar.
+    // Login submit.
     @PostMapping("/")
     public ModelAndView setLoginPage(@RequestParam Map<String, String> body) {
-        
         // Pegando os dados do form.
         String cpf = body.get("cpf");
         String senha = body.get("senha");
 
-        // Autenticando com o controller que retorna um booleano.
-        if (accountsController.autenticar(cpf, senha)) { 
-            // Se estiver validado redireciona para a pagina principal.
-            return index(accountsController.getAccountByCPF(cpf));
+        ArrayList<BankAccount> conta = bankService.auth(cpf, senha);
+        if (!conta.isEmpty()) {
+
+            return index(conta.get(0));
 
         } else {
+
             return getLoginPage();
+
         }
     }
 
@@ -62,7 +64,7 @@ public class UrlsAndViews {
         String senha = body.get("senha");   
         
         // Cadastrando no banco.
-        accountsController.cadastrar(nome, cpf, senha);
+        bankService.createAccount(nome, cpf, senha);
 
         return getLoginPage();
     }

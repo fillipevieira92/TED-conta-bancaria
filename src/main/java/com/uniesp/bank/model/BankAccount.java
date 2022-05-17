@@ -31,8 +31,31 @@ public class BankAccount {
     }
 
     public void setSaldo(double valor){
-        this.saldo = valor;
-        
+        this.saldo = valor;        
+    }
+
+    public String getCpf(){
+        return this.cpf;
+    }
+
+    public void setCpf(String cpf){
+        this.cpf = cpf;
+    }
+
+    public String getNome(){
+        return this.nome;
+    }
+
+    public void setNome(String nome){
+        this.nome = nome;
+    }
+
+    public String getSenha(){
+        return this.senha;
+    }
+
+    public void setSenha(String senha){
+        this.senha = senha;
     }
 
 } 

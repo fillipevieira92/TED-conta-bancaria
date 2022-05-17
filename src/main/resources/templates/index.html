@@ -64,7 +64,7 @@
                     <div class="row">
                         <input type="hidden" name="cpfSaque" th:value="${usuario.cpf}">
                         <input class="col" type="text" name="saldoSaque" id="saldoSaque" th:value="|R$: ${usuario.saldo}|" disabled>
-                        <input class="col valores" type="number" name="valorSaque" id="valorSaque" placeholder="Valor a ser sacado">
+                        <input class="col valores" type="text" name="valorSaque" id="valorSaque" placeholder="R$ Valor a ser sacado">
                     </div>
                     <button class="button button-yellow" type="submit">Sacar</button>
                 </form>
@@ -82,7 +82,7 @@
                 <form id="form-transferencias" action="/transferir" method="post" class="text-center">
                     <div class="row">
                         <input class="col" type="text" id="saldoTransferencia" th:value="|R$: ${usuario.saldo}|" disabled>
-                        <input class="col valores" type="text" id="valor-transferencia" placeholder="Valor a ser transferido">
+                        <input class="col valores" type="text" id="valor-transferencia" placeholder="R$ Valor a ser transferido">
                     </div>
                     <button class="button button-yellow" type="submit">Transferir</button>
                 </form>
@@ -94,7 +94,7 @@
                     <div class="row">
                         <input type="hidden" name="cpfDeposito" th:value="${usuario.cpf}">
                         <input class="col" type="text" id="saldoDeposito" th:value="|R$: ${usuario.saldo}|" disabled>
-                        <input class="col valores" type="text" name="valorDeposito" id="valorDeposito" placeholder="Valor a ser depositado">
+                        <input class="col valores" type="text" name="valorDeposito" id="valorDeposito" placeholder="R$ Valor a ser depositado">
                     </div>
                     <button class="button button-yellow" type="submit">Depositar</button>
                 </form>

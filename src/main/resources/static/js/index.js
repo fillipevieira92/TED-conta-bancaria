@@ -1,10 +1,13 @@
 // Mascaras para os inputs
 $('#cpf-pesquisa').mask('000.000.000-00')
 /* $('.valores').mask('R$000000'); */
+$('.valores').on('keypress', function(event) {
+    return event.charCode >= 48 && event.charCode <= 57 || event.charCode == 46 || event.charCode == 13;
+})
 
 // Validando se tem algum valor no campo valores, caso nao tenha ele limpa o conteúdo.
 $('.valores').on('focusout', function() {
-    const valor =  parseInt(this.value.split('R$')[1])
+    const valor =  parseFloat(this.value)
     if (isNaN(valor) || valor === 0) {
         this.value = '';
     }    
