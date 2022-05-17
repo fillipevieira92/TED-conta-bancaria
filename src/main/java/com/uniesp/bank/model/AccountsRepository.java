@@ -1,4 +1,4 @@
-package com.uniesp.bank.entity;
+package com.uniesp.bank.model;
 
 
 import org.springframework.data.jpa.repository.JpaRepository;

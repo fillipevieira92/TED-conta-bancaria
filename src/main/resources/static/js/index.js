@@ -1,6 +1,6 @@
 // Mascaras para os inputs
 $('#cpf-pesquisa').mask('000.000.000-00')
-$('.valores').mask('R$000000');
+/* $('.valores').mask('R$000000'); */
 
 // Validando se tem algum valor no campo valores, caso nao tenha ele limpa o conteúdo.
 $('.valores').on('focusout', function() {

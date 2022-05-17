@@ -3,8 +3,8 @@ package com.uniesp.bank;
 
 import java.util.Map;
 
-import com.uniesp.bank.entity.AccountsController;
-import com.uniesp.bank.entity.BankAccount;
+import com.uniesp.bank.model.AccountsController;
+import com.uniesp.bank.model.BankAccount;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -90,10 +90,10 @@ public class UrlsAndViews {
     public ModelAndView setDeposito(@RequestParam Map<String, String> body) {
 
         ModelAndView modelAndView = new ModelAndView("index");
-
+        System.out.println(body.get("valorDeposito"));
         // Recebendo os dados do form deposito.
         String cpf = body.get("cpfDeposito");
-        double valor = Double.parseDouble(body.get("valorDeposito").replaceAll("[\"R$ ]", ""));
+        double valor = Double.parseDouble(body.get("valorDeposito").replaceAll("[\", ]", ""));
         
         // Depositando.
         BankAccount conta = accountsController.depositar(cpf, valor);

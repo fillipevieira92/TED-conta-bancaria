@@ -64,7 +64,7 @@
                     <div class="row">
                         <input type="hidden" name="cpfSaque" th:value="${usuario.cpf}">
                         <input class="col" type="text" name="saldoSaque" id="saldoSaque" th:value="|R$: ${usuario.saldo}|" disabled>
-                        <input class="col valores" type="text" name="valorSaque" id="valorSaque" placeholder="Valor a ser sacado">
+                        <input class="col valores" type="number" name="valorSaque" id="valorSaque" placeholder="Valor a ser sacado">
                     </div>
                     <button class="button button-yellow" type="submit">Sacar</button>
                 </form>
