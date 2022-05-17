@@ -1,4 +1,4 @@
-package com.uniesp.bank.objects;
+package com.uniesp.bank.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class BankAccounts {
+public class BankAccount {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -26,4 +26,13 @@ public class BankAccounts {
     double saldo;
     String senha;
     
+    public double getSaldo(){
+        return this.saldo;
+    }
+
+    public void setSaldo(double valor){
+        this.saldo = valor;
+        
+    }
+
 } 
