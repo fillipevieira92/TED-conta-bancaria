@@ -36,9 +36,7 @@ public class ViewsController {
     public ModelAndView loginSubmit(@RequestParam Map<String, String> body) {
         
         ArrayList<BankAccountDTO> conta = bankService.auth(body);
-        System.out.println("response auth:");
-        System.out.println(conta);
-
+        
         if (!conta.isEmpty()) {
 
             return index(conta.get(0));
@@ -60,7 +58,7 @@ public class ViewsController {
     @PostMapping("/signup")
     public ModelAndView setCadastro(@RequestParam Map<String, String> body) {       
         
-        // Cadastrando no banco.
+        // Enviando para o serviço de abertura de conta.
         bankService.openAccount(body);
 
         return getLoginPage();
@@ -79,15 +77,15 @@ public class ViewsController {
         
         // Adicionando os dados de usuario.
         modelAndView.addObject("usuario", usuario);
-        System.out.println("index view:");                    
-        System.out.println(usuario);
+        
         return modelAndView;
     }
 
     // Função para depositar.
     @PostMapping("/deposit")
     public ResponseEntity<BankAccountDTO> setDeposito(@RequestBody Map<String, String> body) {
-        // Depositando o valor.
+
+        // Enviando para o serviço de deposito.
         BankAccountDTO conta = bankService.deposit(body);
 
         return new ResponseEntity<BankAccountDTO>(conta, HttpStatus.OK);
@@ -97,7 +95,8 @@ public class ViewsController {
     // Função para sacar.
     @PostMapping("/whitdraw")
     public ResponseEntity<BankAccountDTO> setSaque(@RequestBody Map<String, String> body) {
-        // Retirando o valor.
+
+        // Enviando para o serviço de retirada.
         BankAccountDTO conta = bankService.withdraw(body);
 
         return new ResponseEntity<BankAccountDTO>(conta, HttpStatus.OK);
@@ -106,15 +105,20 @@ public class ViewsController {
     // Função para transferir.
     @PostMapping("/transfer")
     public ResponseEntity<BankAccountDTO> setTransfer(@RequestBody Map<String, String> body) {
-        // Retirando o valor.
+        
+        // Enviando para o serviço de transferencia
         BankAccountDTO conta = bankService.transfer(body);
 
         return new ResponseEntity<BankAccountDTO>(conta, HttpStatus.OK);
     }
-    /* 
-
 
     // Função ajax para achar o destinatario pelo cpf.
+    @PostMapping("/ajaxFindCpf")
+    public ResponseEntity<BankAccountDTO> ajaxFindCpf(@RequestBody Map<String, String> body) {
+        
+        // Enviando para o serviço de procurar por cpf.
+        BankAccountDTO conta = bankService.findCpf(body);
 
-     */
+        return new ResponseEntity<BankAccountDTO>(conta, HttpStatus.OK);
+    }
 }

@@ -1,22 +1,32 @@
-// Mascaras para os inputs
-$('#cpf-pesquisa').mask('000.000.000-00')
-/* $('.valores').mask('R$000000'); */
+// Mascaras para os inputs de cpf
+$('#cpf_pesquisa').mask('000.000.000-00')
+
+// Limitando os tipos de caracteres dos campos de valores.
 $('.valores').on('keypress', function(event) {
     return event.charCode >= 48 && event.charCode <= 57 || event.charCode == 46 || event.charCode == 13;
+})
+
+// Ocultando os alertas no evento do clique.
+document.addEventListener('click', () => {
+
+    if ( $('#alert').hasClass('row') ) {
+        document.querySelector('#alert').removeAttribute('class');
+        $('.alert-text').text('');
+    }
 })
 
 // Validando se tem algum valor no campo valores, caso nao tenha ele limpa o conteúdo.
 $('.valores').on('focusout', function() {
     const valor =  parseFloat(this.value)
-    if (isNaN(valor) || valor === 0) {
+    if (isNaN(valor) || valor == 0) {
         this.value = '';
     }    
 });
 
-// Navegador
+// Navegando entre abas.
 $('li').on('click', function() {
     let id = $(this).attr('id');
-
+    
     if (!$(this).hasClass('selected')) {
         // Desabilitando o conteudo do antigo selected.
         let oldSelectedID = $('.selected').attr('id');

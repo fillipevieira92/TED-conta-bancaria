@@ -73,9 +73,13 @@ public class BankService {
         
         return accountsController.transfer(cpf, cpfDestino, valor);
     }
-/*     
-    
 
     // Serviço de busca por cpf ajax.
- */
+    public BankAccountDTO findCpf(Map<String, String> body) {
+
+        // Recebendo os dados do ajax pesquisa por cpf.
+        String cpf = body.get("cpf");
+        
+        return accountsController.getAccountByCPF(cpf);
+    }
 }

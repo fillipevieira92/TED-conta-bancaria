@@ -43,7 +43,10 @@ public class AccountsController {
 
         // Preparando o DTO.
         BankAccountDTO contaDTO = new BankAccountDTO();
-        contaDTO.setAccountOriginDTO(conta);
+
+        if (!(conta == null)){
+            contaDTO.setAccountOriginDTO(conta);
+        }
 
         return contaDTO;
     }
@@ -117,22 +120,24 @@ public class AccountsController {
         conta.setNumConta(numConta);
 
         // Salvando no banco.
-        repository.save(conta);        
+        repository.save(conta);
     }
 
     public int generateAccountNumber(){
         
         int numConta;
-        System.out.println("generateAccountNumber");
+        
         // Pegando todas as contas.
         List<BankAccount> contas = repository.findAll();
         if (!contas.isEmpty()){
-
+            // Se existir conta, pegar o numero da ultima conta e incrementar mais um.
             numConta = (contas.get(contas.size()-1).getNumConta() + 1);
+
         } else {
+            // Caso nao exista nenhuma conta, a primeira será de numero 1111.
             numConta = 1111;
         }
-        System.out.println(numConta);
+        
         return numConta;
     }
 
