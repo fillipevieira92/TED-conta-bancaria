@@ -22,7 +22,6 @@ Depois de rodar o sistema, ele estará disponível no <a target="_blank" href="h
  - Java 18
  - SpringBoot
  - Maven
-<br>
 
 #### Front-End:
  - HTML5
