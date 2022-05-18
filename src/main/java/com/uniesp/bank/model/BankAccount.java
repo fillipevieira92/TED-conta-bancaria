@@ -20,12 +20,21 @@ public class BankAccount {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    Long conta;
+    Long id;
+    int numConta;
     String nome;
     String cpf;
     double saldo;
     String senha;
-    
+
+    public int getNumConta(){
+        return this.numConta;
+    }
+
+    public void setNumConta(int numConta){
+        this.numConta = numConta;
+    }
+
     public double getSaldo(){
         return this.saldo;
     }

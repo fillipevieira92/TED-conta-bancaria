@@ -2,17 +2,16 @@ package com.uniesp.bank.controllers;
 
 import java.util.List;
 
+import com.uniesp.bank.dto.BankAccountDTO;
 import com.uniesp.bank.model.BankAccount;
 import com.uniesp.bank.repository.BankAccountRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 
 @RestController
 @AllArgsConstructor
-@NoArgsConstructor
 public class AccountsController {
 
     @Autowired
@@ -22,12 +21,13 @@ public class AccountsController {
         return repository.findAll();
     }
 
-    // Função para autenticar o login do usuário
+    // Função para autenticar o login do usuário.
     public boolean authenticate(String cpf, String senha) {
-
+        
+        // Pegando todos os usuarios e iterando.
         List<BankAccount> usuarios = repository.findAll();
         for (BankAccount usuario : usuarios) {
-
+            // Procurando o usuario com cpf e senha igual aos dados de entrada.
             if (usuario.getCpf().equals(cpf) && usuario.getSenha().equals(senha)) {
                 return true;
             }
@@ -37,37 +37,103 @@ public class AccountsController {
     }
 
     // Pesquisa por cpf
-    public BankAccount getAccountByCPF(String cpf) {
-        return repository.findByCpf(cpf);
+    public BankAccountDTO getAccountByCPF(String cpf) {
+
+        BankAccount conta = repository.findByCpf(cpf);
+
+        // Preparando o DTO.
+        BankAccountDTO contaDTO = new BankAccountDTO();
+        contaDTO.setAccountOriginDTO(conta);
+
+        return contaDTO;
     }
 
     // Depositar
-    public BankAccount deposit(String cpf, double valor) {
+    public BankAccountDTO deposit(String cpf, double valor) {
+
+        // Pegando a conta no banco de dados, alterando o saldo e salvando.
         BankAccount conta = repository.findByCpf(cpf);
         conta.setSaldo(conta.getSaldo() + valor);
         repository.save(conta);
-        return conta;
+        
+        // Preparando o DTO.
+        BankAccountDTO contaDTO = new BankAccountDTO();
+        contaDTO.setAccountOriginDTO(conta);
+        
+
+        return contaDTO;
     }
 
     // Sacar
-    public BankAccount withdraw(String cpf, double valor) {
+    public BankAccountDTO withdraw(String cpf, double valor) {
+
+        // Pegando a conta no banco de dados alterando o saldo e salvando.
         BankAccount conta = repository.findByCpf(cpf);
         conta.setSaldo(conta.getSaldo() - valor);
         repository.save(conta);
         
-        return conta;
+        // Preparando o DTO.
+        BankAccountDTO contaDTO = new BankAccountDTO();
+        contaDTO.setAccountOriginDTO(conta);
+        
+        return contaDTO;
+    }
+
+    // Transferir
+    public BankAccountDTO transfer(String cpf, String cpfDestino, double valor) {
+
+        // Pegando as contas de origem e destino. e salvando.
+        BankAccount contaOrigem = repository.findByCpf(cpf);
+        BankAccount contaDestino = repository.findByCpf(cpfDestino);
+
+        // Alterando o saldo com o valor.
+        contaOrigem.setSaldo(contaOrigem.getSaldo() - valor);
+        contaDestino.setSaldo(contaDestino.getSaldo() + valor);
+
+        // Salvando.
+        repository.save(contaOrigem);
+        repository.save(contaDestino);
+        
+        // Preparando o DTO.
+        BankAccountDTO contaDTO = new BankAccountDTO();
+        contaDTO.setAccountOriginDTO(contaOrigem);
+
+        return contaDTO;
     }
 
     // Cadastra a conta.
-    public BankAccount register(String nome, String cpf, String senha) {
+    public void register(String nome, String cpf, String senha) {
 
+        // Criando uma nova clase BankAccount
         BankAccount conta = new BankAccount();
 
+        // Criando numero da conta.
+        int numConta = generateAccountNumber();
+
+        // Setando os valores
         conta.setCpf(cpf);
         conta.setNome(nome);
         conta.setSenha(senha);
+        conta.setNumConta(numConta);
 
-        return repository.save(conta);
+        // Salvando no banco.
+        repository.save(conta);        
+    }
+
+    public int generateAccountNumber(){
+        
+        int numConta;
+        System.out.println("generateAccountNumber");
+        // Pegando todas as contas.
+        List<BankAccount> contas = repository.findAll();
+        if (!contas.isEmpty()){
+
+            numConta = (contas.get(contas.size()-1).getNumConta() + 1);
+        } else {
+            numConta = 1111;
+        }
+        System.out.println(numConta);
+        return numConta;
     }
 
 }

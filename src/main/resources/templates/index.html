@@ -16,6 +16,7 @@
 
     <!-- JS -->
     <script src="/js/index.js" defer></script>
+    <script src="/js/ajax.js" defer></script>
     
     
     <title>FV | Bank</title>
@@ -49,8 +50,8 @@
                     <span><strong>Olá, seja bem vindo(a)</strong></span>
                 </div>
                 <div class="row">
-                    <input class="col" type="text" id="conta" th:value="|Conta: ${usuario.conta}|" disabled>
-                    <input class="col" type="text" id="saldo" th:value="|R$: ${usuario.saldo}|" disabled>
+                    <input class="col" type="text" id="conta" th:value="|Conta: ${usuario.numConta}|" disabled>
+                    <input class="col saldo" type="text" id="saldo" th:value="|R$: ${usuario.saldo}|" disabled>
                 </div>
                 <div class="row">
                     <input class="col" type="text" id="nome" th:value="|Nome: ${usuario.nome}|" disabled>
@@ -60,11 +61,11 @@
 
             <!-- Saque -->
             <div class="saque" hidden>
-                <form action="/whitdraw" method="post" class="text-center">
+                <form id="form-saque" action="/whitdraw" method="post" class="text-center">
                     <div class="row">
-                        <input type="hidden" name="cpfSaque" th:value="${usuario.cpf}">
-                        <input class="col" type="text" name="saldoSaque" id="saldoSaque" th:value="|R$: ${usuario.saldo}|" disabled>
-                        <input class="col valores" type="text" name="valorSaque" id="valorSaque" placeholder="R$ Valor a ser sacado">
+                        <input type="hidden" name="cpfOrigem" th:value="|${usuario.cpf}|">
+                        <input class="col saldo" type="text" name="saldoSaque" id="saldoSaque" th:value="|R$: ${usuario.saldo}|" disabled>
+                        <input class="col valores" type="text" name="valor" id="valorSaque" placeholder="R$ Valor a ser sacado">
                     </div>
                     <button class="button button-yellow" type="submit">Sacar</button>
                 </form>
@@ -76,13 +77,14 @@
                     <input class="col" type="text" id="cpf-pesquisa" placeholder="Pesquise a conta destino por CPF">
                 </div>
                 <div class="row dados-destino-transferencia">
-                    <input class="col" type="text" id="conta-destino" th:value="|Conta Destino: ${destinatarioConta}|" disabled>
-                    <input class="col" type="text" id="nome-destino" th:value="|Nome Destino: ${destinatarioNome}|" disabled>
+                    <input class="col" type="text" id="conta-destino" value="Conta Destino: " disabled>
+                    <input class="col" type="text" id="nome-destino" value="Nome Destino: " disabled>
                 </div>
-                <form id="form-transferencias" action="/transferir" method="post" class="text-center">
+                <form id="form-transferencia" action="/transferir" method="post" class="text-center">
                     <div class="row">
-                        <input class="col" type="text" id="saldoTransferencia" th:value="|R$: ${usuario.saldo}|" disabled>
-                        <input class="col valores" type="text" id="valor-transferencia" placeholder="R$ Valor a ser transferido">
+                        <input type="hidden" name="cpfOrigem" th:value="|${usuario.cpf}|">
+                        <input class="col saldo" type="text" id="saldoTransferencia" th:value="|R$: ${usuario.saldo}|" disabled>
+                        <input class="col valores" type="text" name="valorTransferencia" id="valorTransferencia" placeholder="R$ Valor a ser transferido">
                     </div>
                     <button class="button button-yellow" type="submit">Transferir</button>
                 </form>
@@ -92,8 +94,8 @@
             <div class="depositos" hidden>
                 <form id="form-deposito" action="/deposit" method="post" class="text-center">
                     <div class="row">
-                        <input type="hidden" name="cpfDeposito" th:value="${usuario.cpf}">
-                        <input class="col" type="text" id="saldoDeposito" th:value="|R$: ${usuario.saldo}|" disabled>
+                        <input type="hidden" name="cpfOrigem" th:value="|${usuario.cpf}|">
+                        <input class="col saldo" type="text" id="saldoDeposito" th:value="|R$: ${usuario.saldo}|" disabled>
                         <input class="col valores" type="text" name="valorDeposito" id="valorDeposito" placeholder="R$ Valor a ser depositado">
                     </div>
                     <button class="button button-yellow" type="submit">Depositar</button>
