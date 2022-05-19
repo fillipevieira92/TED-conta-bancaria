@@ -1,20 +1,46 @@
 <div align="center">
   <img src="/src/main/resources/static/img/logo-amarelo.png">
- </div>
+</div>
  
 # Descrição
 Projeto desenvolvido para um trabalho de faculdade, onde é solicitado um algoritmo bancário que se possa cadastrar clientes e realizar transações financeiras.
 
 # Rodando a aplicação
 O projeto é desenvolvido em Java versão 18, utilizando o Maven. Para rodar a aplicação vá até pasta do projeto no terminal e envie o comando:<br> 
-'mvn spring-boot:run'.
+
 <br>
+
+>$ `mvn spring-boot:run`
+
+<br>
+
 ![build-logs](https://user-images.githubusercontent.com/90570370/169057847-a34f6cef-2196-4ca4-ab14-7a71a422ec0c.png)
 
 
+# Rodando a aplicação com Docker
+Necessário ter o maven instalado.<br>
+Vá até a pasta do projeto no terminal e envie os seguintes comandos:<br>
+
+<br>
+
+>$ `sudo mvn package`
+###### * Baixar todas as dependecias, criar o arquivo JAR e rodar o Dockerfile (criando a imagem):
+
+<br>
+
+>$ `sudo docker images`
+###### * Listar todas as imagens disponíveis e procurar o ID da imagem com nome = 'com/uniesp/bank':
+
+<br>
+
+>$ `sudo docker run -p 8080:8080 ID-DA-IMAGEM`
+###### * Rodar o container na porta 8080:
+
+<br>
+
 # Visualizando o site
 Depois de rodar o sistema, ele estará disponível no <a target="_blank" href="http:127.0.0.1:8080">localhost</a>
-<br>
+
 ![image](https://user-images.githubusercontent.com/90570370/169057573-db4aa74c-ed4b-4c57-8e3e-1e63311c46c4.png)
 
 # Tecnologias utilizadas
