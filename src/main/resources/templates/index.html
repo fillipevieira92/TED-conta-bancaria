@@ -24,7 +24,7 @@
 <div class="msg">Site disponível apenas para computadores.</div>
 <body>
     <header>
-        <img src="/img/logo-amarelo.png" alt="">
+        <img src="/img/logo-extenso-preto.png" alt="">
         <nav>
             <ul>
                 <li id="inicio" class="selected">Inicio</li>
@@ -36,17 +36,14 @@
         </nav>
     </header>
     <main>        
-        <!-- Background LOGO -->
-        
-
-        <div class="back-img"><img src="/img/logo-escuro.png" width="50%" height="50%" alt=""></div>
-        
         <!-- Conteudo -->
         <div class="container">
             <!-- Mensagem de alerta -->
-            <span id="alert">
-                <span class="alert-text text-center"></span>
-            </span>
+            <div class="w-100 text-center mx-auto">
+                <span id="alert" class="alert alert-default w-100 mx-auto p-5 pt-2 pb-2" hidden>
+                    <strong style="color:var(--amarelo);" class="alert-text text-center"></strong>
+                </span>
+            </div>
             
             <!-- Inicio -->
             <div class="inicio">
@@ -79,7 +76,7 @@
             <!-- Transferencia -->
             <div class="transferencias" hidden>
                 <div class="row">
-                    <input class="col" type="text" id="cpf_pesquisa" placeholder="Pesquise a conta destino por CPF" autocomplete="off">
+                    <input class="col text-center" type="text" id="cpf_pesquisa" placeholder="Pesquise a conta destino por CPF" autocomplete="off">
                 </div>
                 <div class="row dados-destino-transferencia">
                     <input class="col" type="text" id="conta_destino" value="Conta Destino: " disabled>

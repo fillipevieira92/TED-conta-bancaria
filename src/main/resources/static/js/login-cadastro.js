@@ -64,3 +64,21 @@ function validaSenha () {
 
     validaCampos()    
 }
+
+// Exibindo o alerta.
+if ($("#alerta").text() != "") {
+
+    $(".alert").prop("hidden", false);
+    $("#alerta").css("color", "var(--amarelo)")
+
+} else {
+    $("#alerta").prop("hidden", true);
+}
+
+// Ocultando os alertas no evento do clique.
+document.addEventListener('click', () => {
+
+    if ( $('#alerta').prop("hidden") == false ) {
+        $('#alerta').prop("hidden", true);
+    }
+})

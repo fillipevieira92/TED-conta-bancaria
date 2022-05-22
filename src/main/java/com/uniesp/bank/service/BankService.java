@@ -33,14 +33,28 @@ public class BankService {
     }
 
     // Servico responsável por abrir uma conta no banco.
-    public void openAccount(Map<String, String> body) {
+    public String openAccount(Map<String, String> body) {
+
+        String msg;
 
         // Recebendo os dados do form registro.
         String nome = body.get("nome").toUpperCase();
         String cpf = body.get("cpf");
         String senha = body.get("senha");
 
-        accountsController.register(nome, cpf, senha);
+        BankAccountDTO bankAccountDTO = accountsController.getAccountByCPF(cpf);
+
+        if (bankAccountDTO.getNome() == null) {
+            accountsController.register(nome, cpf, senha);
+            msg = "Conta cadastrada com sucesso!";
+
+        } else {
+
+            msg = "CPF já possui cadastro.";
+
+        }
+        
+        return msg;
     }
 
     // Serviço responsável por depositar dinheiro.

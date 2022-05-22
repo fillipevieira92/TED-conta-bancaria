@@ -56,12 +56,12 @@ $('#cpf_pesquisa').on('keyup', function() {
     } else if (this.value == cpfOrigem) { 
         
         // Criando alerta e texto.
-        $('#alert').attr('class', 'row alert alert-danger');
+        $('#alert').prop("hidden", false);
         $('.alert-text').text('Insira um CPF valido!');
     
     } else {
         // Escondendo alerta.
-        $('#alert').removeAttr('class');
+        $('#alert').prop("hidden", true);
         $('.alert-text').text('');
 
         // Alterando os valores dos campos.
@@ -101,7 +101,7 @@ function sendData(form) {
     // Checando se o saldo é insuficiente para transaçoes diferente de deposito.
     if (url != '/deposit' && parseFloat(valor.value) > parseFloat(saldoDisponivel)) {
         
-        $('#alert').attr('class', 'row alert alert-danger');
+        $('#alert').prop("hidden", false);
         $('.alert-text').text('Saldo insuficiente!');
 
     } else {
@@ -115,7 +115,7 @@ function sendData(form) {
             contentType: 'application/json',
             success: function(bankAccount){
                 // Enviando alerta.   
-                $('#alert').attr('class', 'row alert alert-success');
+                $('#alert').prop("hidden", false);
                 $('.alert-text').text('Transaçao efetuada com sucesso!');
 
                 // Alterando o saldo visivel na tela.

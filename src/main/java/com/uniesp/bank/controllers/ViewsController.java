@@ -27,8 +27,12 @@ public class ViewsController {
 
     // Pagina de login GET    
     @GetMapping("/")
-    public ModelAndView getLoginPage() {
-        return new ModelAndView("login");
+    public ModelAndView getLoginPage(String msg) {
+        ModelAndView modelAndView = new ModelAndView("login");
+        if (msg != "none") {
+            modelAndView.addObject("msg", msg);
+        }
+        return modelAndView;
     }
 
     // Login submit.
@@ -42,9 +46,9 @@ public class ViewsController {
             return index(conta.get(0));
 
         } else {
-
-            return getLoginPage();
-
+            
+            String msg = "CPF ou senha incorretos, tente novamente.";
+            return getLoginPage(msg);
         }
     }
 
@@ -59,15 +63,18 @@ public class ViewsController {
     public ModelAndView setCadastro(@RequestParam Map<String, String> body) {       
         
         // Enviando para o serviço de abertura de conta.
-        bankService.openAccount(body);
+        String msg = bankService.openAccount(body);
 
-        return getLoginPage();
+        return getLoginPage(msg);
     }
     
 
     @GetMapping("/logout")
     public ModelAndView logout() {
-        return getLoginPage();
+
+        String msg = "none";
+
+        return getLoginPage(msg);
     }
 
     // Funcao que trás a pagina home, recebendo o usuario do login como parametro.

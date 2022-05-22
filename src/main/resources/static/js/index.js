@@ -9,9 +9,9 @@ $('.valores').on('keypress', function(event) {
 // Ocultando os alertas no evento do clique.
 document.addEventListener('click', () => {
 
-    if ( $('#alert').hasClass('row') ) {
-        document.querySelector('#alert').removeAttribute('class');
+    if ( $('#alert').prop("hidden") == false ) {
         $('.alert-text').text('');
+        $('#alert').prop("hidden", true);
     }
 })
 
