@@ -78,7 +78,7 @@ if ($("#alerta").text() != "") {
 // Ocultando os alertas no evento do clique.
 document.addEventListener('click', () => {
 
-    if ( $('#alerta').prop("hidden") == false ) {
-        $('#alerta').prop("hidden", true);
+    if ( $('.alert').prop("hidden") == false ) {
+        $('.alert').prop("hidden", true);
     }
 })
